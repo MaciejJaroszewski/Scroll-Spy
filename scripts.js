@@ -1,17 +1,30 @@
 var itemsArray = [];
+var windowPosition;
+var windowHeight;
 // ------------
 // functions
 // ------------
-function adjustPosition () {
-  var windowHeight = $(window).height();
+function adjustPosition(){
+  windowHeight = $(window).height();
   if(windowHeight>($('ul.scroll-spy').height())){
     $('ul.scroll-spy').css("top", windowHeight/2+"px");
 // problem with resize scrollspy to bigger size when resized    
   } else {
     $('li.scroll-item').css("marginTop", "5px");
     $('li.scroll-item:last-child').css("marginBottom", "5px");
-  }
-
+  }  
+}
+function getCurrentWindowPosition(){
+  windowPosition = $(window).scrollTop();
+  console.log("Pozycja okna: "+windowPosition+" Wysokość okna: "+windowHeight);
+  return windowPosition;
+}
+function checkSectionScope(){
+  $('.section-item').each(function(){
+    $(this).data("data-top", $(this).offset().top);
+  });
+}
+function scrollSpy(){
   
 }
 //------------------------
@@ -34,13 +47,14 @@ $('li.scroll-item').each(function(index){
 });
 
 adjustPosition();
-
+checkSectionScope();
 
 
 
 // during resize window
 $(window).resize(function(){
   adjustPosition();
+  checkSectionScope();
 });
 
 // click action
@@ -61,5 +75,7 @@ $('li.scroll-item').click(function(){
 
 // during scrolling
 
-$(window).scroll()
+$(window).scroll(function(){
+  getCurrentWindowPosition();
+});
 

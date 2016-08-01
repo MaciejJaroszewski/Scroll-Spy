@@ -1,0 +1,49 @@
+body {
+//   remove scrollbar from window
+  font-size: 19px;
+  // overflow: hidden;
+  font-family: 'Lato', sans-serif;
+  line-height: 28px;
+}
+ul {
+  background-color: lighten(gray, 20%);
+  padding: 5px 10px;
+  width: 20px;
+  position: fixed;
+  right: 0;
+  transform:translateY(-50%);
+  border-radius: 4px;
+  li {
+    list-style: none;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-top: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    transition: 200ms linear;
+    &:last-child {
+      margin-bottom: 24px;
+    }
+    &:active {
+      background-color: black;
+    }
+    &:hover {
+      background-color: darken(gray, 15%);
+    }
+    &.active {
+      background-color: black;
+    }
+  }
+}
+.section-item {
+  margin: 1em auto;
+  width: 80%;
+  p {
+    margin-top: 3em;
+    font-weight: bold;
+  }
+}

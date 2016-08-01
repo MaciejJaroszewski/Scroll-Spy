@@ -1,0 +1,47 @@
+body {
+  font-size: 19px;
+  font-family: 'Lato', sans-serif;
+  line-height: 28px;
+}
+ul {
+  background-color: #b3b3b3;
+  padding: 5px 10px;
+  width: 20px;
+  position: fixed;
+  right: 0;
+  transform: translateY(-50%);
+  border-radius: 4px;
+}
+ul li {
+  list-style: none;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-top: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  transition: 200ms linear;
+}
+ul li:last-child {
+  margin-bottom: 24px;
+}
+ul li:active {
+  background-color: black;
+}
+ul li:hover {
+  background-color: #5a5a5a;
+}
+ul li.active {
+  background-color: black;
+}
+.section-item {
+  margin: 1em auto;
+  width: 80%;
+}
+.section-item p {
+  margin-top: 3em;
+  font-weight: bold;
+}

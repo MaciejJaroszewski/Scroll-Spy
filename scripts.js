@@ -11,15 +11,19 @@ function adjustPosition () {
     $('li.scroll-item').css("marginTop", "5px");
     $('li.scroll-item:last-child').css("marginBottom", "5px");
   }
+
+  
 }
 //------------------------
 
+
+
+// -- initialize scrollSpy
 $('.section-item').each(function(index){
   itemsArray[index] = index;
   $(this).data("data-index", "section-"+index);
 });
 
-// -- initialize scrollSpy
 $(".container").prepend('<ul class="scroll-spy"></ul>');
 
 for(i=0;i<itemsArray.length; i++){
@@ -31,23 +35,31 @@ $('li.scroll-item').each(function(index){
 
 adjustPosition();
 
+
+
+
 // during resize window
 $(window).resize(function(){
   adjustPosition();
 });
 
+// click action
 $('li.scroll-item').click(function(){
   var destination = $(this).data("data-destination");
-  $('.section-item').each(function(){
+  $('li.scroll-item').each(function(){
     $(this).removeClass("active");
+  });
+  $(this).addClass("active");
+  $('.section-item').each(function(){
     if(($(this).data("data-index"))==destination){
       var position = $(this).offset().top;
       $("html, body").animate({
         scrollTop: position}, 800);
-      $(this).addClass("active");
     }
   });
 });
 
+// during scrolling
 
+$(window).scroll()
 

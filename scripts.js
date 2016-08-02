@@ -1,6 +1,8 @@
 var itemsArray = [];
 var windowPosition;
 var windowHeight;
+var sectionsScopes = [];
+var actualSection;
 // ------------
 // functions
 // ------------
@@ -16,17 +18,19 @@ function adjustPosition(){
 }
 function getCurrentWindowPosition(){
   windowPosition = $(window).scrollTop();
-  console.log("Pozycja okna: "+windowPosition+" Wysokość okna: "+windowHeight);
   return windowPosition;
 }
 function checkSectionScope(){
   $('.section-item').each(function(){
-    $(this).data("data-top", $(this).offset().top);
+    var itemTop = $(this).offset().top;
+    // adding offset to sections
+    console.log(itemTop);
+    sectionsScopes.push($(this).offset().top-100);
   });
+  sectionsScopes.shift();
+  sectionsScopes.push($(document).height());
 }
-function scrollSpy(){
-  
-}
+
 //------------------------
 
 
@@ -60,10 +64,10 @@ $(window).resize(function(){
 // click action
 $('li.scroll-item').click(function(){
   var destination = $(this).data("data-destination");
-  $('li.scroll-item').each(function(){
-    $(this).removeClass("active");
-  });
-  $(this).addClass("active");
+  // $('li.scroll-item').each(function(){
+  //   $(this).removeClass("active");
+  // });
+  // $(this).addClass("active");
   $('.section-item').each(function(){
     if(($(this).data("data-index"))==destination){
       var position = $(this).offset().top;
@@ -77,5 +81,20 @@ $('li.scroll-item').click(function(){
 
 $(window).scroll(function(){
   getCurrentWindowPosition();
+  $('li.scroll-item').each(function(){
+    $(this).removeClass('active');
+  });
+  for(i=0;i<sectionsScopes.length;i++){
+    if(windowPosition<sectionsScopes[i]){
+      actualSection = i;
+      $("li.scroll-item").each(function(){
+        var destination = "section-"+actualSection;
+        if($(this).data("data-destination")==destination){
+          $(this).addClass("active");
+        }
+      })
+      return;
+    }
+  }  
 });
 
